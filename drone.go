@@ -20,6 +20,7 @@ func drone(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+	log.Println("Client connected.")
 
 	droneConn = ws
 }
