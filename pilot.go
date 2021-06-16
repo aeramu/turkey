@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gorilla/websocket"
 	"io"
 	"log"
 	"net/http"
@@ -17,7 +18,7 @@ func pilot(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("There is no connected client."))
 		return
 	}
-	if err := droneConn.WriteJSON(string(b)); err != nil {
+	if err := droneConn.WriteMessage(websocket.TextMessage, b); err != nil {
 		log.Println("Failed send message to client:", err)
 		w.Write([]byte("Internal Server Error"))
 		return
